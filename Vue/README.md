@@ -2,7 +2,7 @@
 
 Take a look at the following files of this example to see the required code: 
 
-- [Home.vue](..)
+- [Home.vue](https://github.com/DevExpress-Examples/DataGrid-How-to-hide-disable-certain-Edit-Form-items-based-on-another-item-s-value/blob/18b68f7d233102c82753e9867e4b9ed2b5dac08d/Vue/src/components/Home.vue#L1)
 
 This project was bootstrapped with [Vue CLI](https://cli.vuejs.org/).
 

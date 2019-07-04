@@ -2,8 +2,8 @@
 
 Take a look at the following files of this example to see the required code: 
 
-- [app.component.html](https://github.com/DevExpress-Examples/DataGrid-How-to-hide-disable-certain-Edit-Form-items-based-on-another-item-s-value/blob/19.1.3%2B/src/app/app.component.html)
-- [app.component.ts](https://github.com/DevExpress-Examples/DataGrid-How-to-hide-disable-certain-Edit-Form-items-based-on-another-item-s-value/blob/19.1.3%2B/src/app/app.component.ts)
+- [app.component.html](https://github.com/DevExpress-Examples/DataGrid-How-to-hide-disable-certain-Edit-Form-items-based-on-another-item-s-value/blob/18b68f7d233102c82753e9867e4b9ed2b5dac08d/Angular/src/app/app.component.html#L1)
+- [app.component.ts](https://github.com/DevExpress-Examples/DataGrid-How-to-hide-disable-certain-Edit-Form-items-based-on-another-item-s-value/blob/18b68f7d233102c82753e9867e4b9ed2b5dac08d/Angular/src/app/app.component.ts#L11)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.0.
 
