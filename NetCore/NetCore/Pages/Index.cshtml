@@ -1,0 +1,120 @@
+@page
+@using NetCore.Models
+
+<h2 class="content-block">Home</h2>
+<script type="text/javascript">
+    var rowKey = -1;
+    function setCellValue(newData, value) {
+        let column = this;
+        column.defaultSetCellValue(newData, value);
+    }
+    function customizeItem(item) {
+        if (
+            item &&
+            item.itemType === "group" &&
+            item.caption === "Home Address"
+        ) {
+            var dataGrid = $("#gridContainer").dxDataGrid("instance");
+            var index = dataGrid.getRowIndexByKey(rowKey) || 0;
+            var isVisible = dataGrid.cellValue(index, "AddressRequired");
+            item.visible = isVisible;
+        }
+    }
+    function onEditorPreparing(e) {
+        if (e.dataField === "LastName" && e.parentType === "dataRow") {
+            e.editorOptions.disabled = e.row.data && e.row.data.FirstName === "";
+        }
+    }
+    function onEditingStart(e) {
+        rowKey = e.key;
+    }
+    function onInitNewRow(e) {
+        e.data.AddressRequired = false;
+        e.data.FirstName = "";
+    }
+</script>
+@(Html.DevExtreme().DataGrid<Employee>()
+            .ID("gridContainer")
+            .ElementAttr(new { @class = "dx-card wide-card" })
+            .DataSource(d => d.Mvc().Controller("Orders")
+            .LoadAction("Get")
+            .UpdateAction("Put")
+            .InsertAction("Post")
+            .Key("ID"))
+            .OnInitNewRow("onInitNewRow")
+            .OnEditingStart("onEditingStart")
+            .OnEditorPreparing("onEditorPreparing")
+            .ShowBorders(true)
+            .Paging(p => p.Enabled(false))
+            .Editing(e => e.Mode(GridEditMode.Popup)
+                   .AllowUpdating(true)
+                   .AllowAdding(true)
+                   .Popup(p => p
+                        .Title("Employee Info")
+                        .ShowTitle(true)
+                        .Width(700)
+                        .Height(725)
+                        .Position(pos => pos
+                            .My(HorizontalAlignment.Center, VerticalAlignment.Top)
+                            .At(HorizontalAlignment.Center, VerticalAlignment.Top)
+                            .Of(new JS("window"))
+                        )
+                   )
+                   .Form(f => f.CustomizeItem("customizeItem").Items(items =>
+                   {
+                       items.AddGroup()
+                           .ColCount(2)
+                           .ColSpan(2)
+                           .Items(groupItems =>
+                           {
+                               groupItems.AddSimpleFor(m => m.FirstName);
+                               groupItems.AddSimpleFor(m => m.LastName);
+                               groupItems.AddSimpleFor(m => m.Prefix);
+                               groupItems.AddSimpleFor(m => m.BirthDate);
+                               groupItems.AddSimpleFor(m => m.Position);
+                               groupItems.AddSimpleFor(m => m.HireDate);
+
+                               groupItems.AddSimpleFor(m => m.Notes)
+                                   .ColSpan(2)
+                                   .Editor(editor => editor.TextArea().Height(100));
+                           });
+                       items.AddSimpleFor(m => m.AddressRequired)
+                            .ColSpan(2);
+                       items.AddGroup()
+                           .Caption("Home Address")
+                           .ColCount(2)
+                           .ColSpan(2)
+                           .Items(groupItems =>
+                           {
+                               groupItems.AddSimpleFor(m => m.StateID);
+                               groupItems.AddSimpleFor(m => m.Address);
+                           });
+                   }))
+             )
+             .Columns(columns =>
+             {
+                 columns.AddFor(m => m.Prefix)
+                     .Width(70);
+                 columns.AddFor(m => m.FirstName)
+                     .SetCellValue("setCellValue");
+                 columns.AddFor(m => m.LastName);
+                 columns.AddFor(m => m.BirthDate);
+                 columns.AddFor(m => m.Position)
+                     .Width(170);
+                 columns.AddFor(m => m.HireDate);
+                 columns.AddFor(m => m.StateID)
+                     .Width(125)
+                     .Lookup(lookup => lookup
+                         .DataSource(d => d.Mvc().Controller("States").LoadAction("Get").Key("ID"))
+                         .DisplayExpr("Name")
+                         .ValueExpr("ID")
+                     );
+                 columns.AddFor(m => m.AddressRequired)
+                     .SetCellValue("setCellValue")
+                     .Visible(false);
+                 columns.AddFor(m => m.Address)
+                     .Visible(false);
+                 columns.AddFor(m => m.Notes)
+                     .Visible(false);
+             })
+)
