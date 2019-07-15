@@ -1,0 +1,41 @@
+[
+    {
+        "outputFileName": "wwwroot/css/vendor.css",
+        "inputFiles": [
+            "wwwroot/css/devextreme/dx.common.css",
+            "wwwroot/css/devextreme/theme.base.css",
+            "wwwroot/css/devextreme/theme.additional.css"
+        ],
+        "minify": {
+            "enabled": false
+        }
+    },
+    {
+        "outputFileName": "wwwroot/js/vendor.js",
+        "inputFiles": [
+            "wwwroot/js/devextreme/jquery.js",
+
+            "wwwroot/js/devextreme/cldr.js",
+            "wwwroot/js/devextreme/cldr/event.js",
+            "wwwroot/js/devextreme/cldr/supplemental.js",
+            "wwwroot/js/devextreme/cldr/unresolved.js",
+
+            "wwwroot/js/devextreme/globalize.js",
+            "wwwroot/js/devextreme/globalize/message.js",
+            "wwwroot/js/devextreme/globalize/number.js",
+            "wwwroot/js/devextreme/globalize/currency.js",
+            "wwwroot/js/devextreme/globalize/date.js",
+
+            // JSZip for client side export
+            // "wwwroot/js/devextreme/jszip.js",
+
+            "wwwroot/js/devextreme/dx.all.js",
+            "wwwroot/js/devextreme/vectormap-data/world.js",
+            "wwwroot/js/devextreme/aspnet/dx.aspnet.data.js",
+            "wwwroot/js/devextreme/aspnet/dx.aspnet.mvc.js"
+        ],
+        "minify": {
+            "enabled": false
+        }
+    }
+]

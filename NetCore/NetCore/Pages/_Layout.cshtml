@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>NetCore</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/vendor.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/vendor.js" asp-append-version="true"></script>
+</head>
+
+<body>
+    <div id="app-side-nav-outer-toolbar">
+        <div class="layout-header">
+            @(Html.DevExtreme().Toolbar()
+                .Items(items => {
+                    items.Add()
+                        .Widget(w => w
+                            .Button()
+                            .Icon("menu")
+                            .OnClick("NetCore.onMenuButtonClick")
+                        )
+                        .Location(ToolbarItemLocation.Before)
+                        .CssClass("menu-button");
+                    items.Add()
+                        .Html("<div>NetCore</div>")
+                        .Location(ToolbarItemLocation.Before)
+                        .CssClass("header-title");
+                })
+            )
+        </div>
+        <div class="layout-body">
+            @(Html.DevExtreme().Drawer()
+                .ID("layout-drawer")
+                .Position(DrawerPosition.Left)
+                .Opened(new JS("NetCore.restoreDrawerOpened()"))
+                .Content(@<text>
+                    <div id="layout-drawer-scrollview" class="with-footer">
+                        <div class="content">
+                            @RenderBody()
+                        </div>
+                        <div class="content-block">
+                            <div class="content-footer">
+                                <div id="footer">
+                                    Copyright (c) 2000-2019 Developer Express Inc.
+                                    <br />
+                                    All trademarks or registered trademarks are property of their respective owners.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </text>)
+                .Template(new TemplateName("navigation-menu"))
+            )
+        </div>
+    </div>
+
+    @using(Html.DevExtreme().NamedTemplate("navigation-menu")) {
+        <div class="menu-container dx-swatch-additional">
+
+            @functions{
+                bool IsCurrentPage(string pageName) {
+                    var pageUrl = Url.Page(pageName);
+                    var currentPageUrl = Url.Page(ViewContext.RouteData.Values["page"].ToString());
+                    return pageUrl == currentPageUrl;
+                }
+            }
+
+            @(Html.DevExtreme().TreeView()
+                .Items(items => {
+                    items.Add()
+                        .Text("Home")
+                        .Icon("home")
+                        .Option("path", Url.Page("Index"))
+                        .Selected(IsCurrentPage("Index"));
+
+                    items.Add()
+                        .Text("About")
+                        .Icon("info")
+                        .Option("path", Url.Page("About"))
+                        .Selected(IsCurrentPage("About"));
+                })
+                .ExpandEvent(TreeViewExpandEvent.Click)
+                .SelectionMode(NavSelectionMode.Single)
+                .SelectedExpr("selected")
+                .FocusStateEnabled(false)
+                .Width(250)
+                .OnItemClick("NetCore.onTreeViewItemClick")
+            )
+        </div>
+    }
+
+    <script>
+
+        var NetCore = (function() {
+
+            var DRAWER_OPENED_KEY = "NetCore-drawer-opened";
+
+            var breakpoints = {
+                xSmallMedia: window.matchMedia("(max-width: 599.99px)"),
+                smallMedia: window.matchMedia("(min-width: 600px) and (max-width: 959.99px)"),
+                mediumMedia: window.matchMedia("(min-width: 960px) and (max-width: 1279.99px)"),
+                largeMedia: window.matchMedia("(min-width: 1280px)")
+            };
+
+            function getDrawer() {
+                return $("#layout-drawer").dxDrawer("instance");
+            }
+
+            function restoreDrawerOpened() {
+                var isLarge = breakpoints.largeMedia.matches;
+                if(!isLarge)
+                    return false;
+
+                var state = sessionStorage.getItem(DRAWER_OPENED_KEY);
+                if(state === null)
+                    return isLarge;
+
+                return state === "true";
+            }
+
+            function saveDrawerOpened() {
+                sessionStorage.setItem(DRAWER_OPENED_KEY, getDrawer().option("opened"));
+            }
+
+            function updateDrawer() {
+                var isXSmall = breakpoints.xSmallMedia.matches,
+                    isLarge = breakpoints.largeMedia.matches;
+
+                getDrawer().option({
+                    openedStateMode: isLarge ? "shrink" : "overlap",
+                    revealMode: isXSmall ? "slide" : "expand",
+                    minSize: isXSmall ? 0 : 60,
+                    shading: !isLarge,
+                });
+            }
+
+            function init() {
+                $("#layout-drawer-scrollview").dxScrollView({ direction: "vertical" });
+
+                $.each(breakpoints, function(_, size) {
+                    size.addListener(function(e) {
+                        if(e.matches)
+                            updateDrawer();
+                    });
+                });
+
+                updateDrawer();
+            }
+
+            function navigate(url, delay) {
+                if(url)
+                    setTimeout(function() { location.href = url }, delay);
+            }
+
+            function onMenuButtonClick() {
+                getDrawer().toggle();
+                saveDrawerOpened();
+            }
+
+            function onTreeViewItemClick(e) {
+                var drawer = getDrawer();
+                var savedOpened = restoreDrawerOpened();
+                var actualOpened = drawer.option("opened");
+
+                if(!actualOpened) {
+                    drawer.show();
+                } else {
+                    var willHide = !savedOpened || !breakpoints.largeMedia.matches;
+                    var willNavigate = !e.itemData.selected;
+
+                    if(willHide)
+                        drawer.hide();
+
+                    if(willNavigate)
+                        navigate(e.itemData.path, willHide ? 400 : 0);
+                }
+            }
+
+            return {
+                init: init,
+                restoreDrawerOpened: restoreDrawerOpened,
+                onMenuButtonClick: onMenuButtonClick,
+                onTreeViewItemClick: onTreeViewItemClick
+            };
+        })();
+
+        document.addEventListener("DOMContentLoaded", function documentReady() {
+            this.removeEventListener("DOMContentLoaded", documentReady);
+            NetCore.init();
+        });
+    </script>
+</body>
+
+</html>
