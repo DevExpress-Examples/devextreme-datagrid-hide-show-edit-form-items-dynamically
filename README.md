@@ -1,4 +1,4 @@
-# DataGrid - How to hide/disable certain Edit Form items based on another item's value
+# DataGrid - How to hide/disable Edit Form items based on another item's value
 
 This example demonstrates how to show/hide or enable/disable form items based on another item's value in DataGrid.
 
