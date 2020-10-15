@@ -24,6 +24,7 @@ export class AppComponent {
 
     if (item && item.itemType === "group" && item.caption === "Home Address") {
       let index = this.dataGrid.instance.getRowIndexByKey(this.rowKey) || 0;
+      index = index === -1 ? 0 : index ;
       let isVisible = this.dataGrid.instance.cellValue(index, "AddressRequired");
       item.visible = isVisible;
     }
@@ -37,6 +38,7 @@ export class AppComponent {
     this.rowKey = e.key;
   }
   onInitNewRow(e) {
+    this.rowKey = -1;
     e.data.AddressRequired = false;
     e.data.FirstName = "";
   }

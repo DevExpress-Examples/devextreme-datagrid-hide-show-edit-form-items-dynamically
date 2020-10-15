@@ -99,7 +99,8 @@ export default {
         item.itemType === "group" &&
         item.caption === "Home Address"
       ) {        
-        let index = this.dataGrid.getRowIndexByKey(this.rowKey) || 0;
+        let index =  this.dataGrid.getRowIndexByKey(this.rowKey);
+        index = index === -1 ? 0 : index ;
         let isVisible = this.dataGrid.cellValue(index, "AddressRequired");
         item.visible = isVisible;
       }
@@ -113,6 +114,7 @@ export default {
       this.rowKey = e.key;
     },
     onInitNewRow(e) {
+      this.rowKey = -1;
       e.data.AddressRequired = false;
       e.data.FirstName = "";
     }

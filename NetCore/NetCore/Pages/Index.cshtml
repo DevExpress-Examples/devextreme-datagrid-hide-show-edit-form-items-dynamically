@@ -15,7 +15,8 @@
             item.caption === "Home Address"
         ) {
             var dataGrid = $("#gridContainer").dxDataGrid("instance");
-            var index = dataGrid.getRowIndexByKey(rowKey) || 0;
+            var index = dataGrid.getRowIndexByKey(rowKey);
+            index = index === -1 ? 0 : index ;
             var isVisible = dataGrid.cellValue(index, "AddressRequired");
             item.visible = isVisible;
         }
@@ -29,6 +30,7 @@
         rowKey = e.key;
     }
     function onInitNewRow(e) {
+        rowKey = -1;
         e.data.AddressRequired = false;
         e.data.FirstName = "";
     }
