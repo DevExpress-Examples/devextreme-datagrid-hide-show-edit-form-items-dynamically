@@ -77,7 +77,8 @@ class App extends React.Component {
   customizeItem = (item) => {
     if (item && item.itemType === "group" && item.caption === "Home Address") {
       let gridInstance = this.dataGrid.current.instance;
-      let index = gridInstance.getRowIndexByKey(this.rowKey) || 0;
+      let index = gridInstance.getRowIndexByKey(this.rowKey);
+      index = index === -1 ? 0 : index ;
       let isVisible = gridInstance.cellValue(index, "AddressRequired");
       item.visible = isVisible;
     }
@@ -91,6 +92,7 @@ class App extends React.Component {
     this.rowKey = e.key;
   }
   onInitNewRow = (e) => {
+    this.rowKey = -1;
     e.data.AddressRequired = false;
     e.data.FirstName = "";
   }
