@@ -5,7 +5,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="DevExtreme.AspNet.Data" Version="2.2.1" />
-    <PackageReference Include="DevExtreme.AspNet.Core" Version="19.1.4" />
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="19.*" />
     <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.1.1" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.9.406" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
