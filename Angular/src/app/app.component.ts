@@ -9,41 +9,39 @@ import { DxDataGridComponent } from 'devextreme-angular';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
   dataSource: any;
   states: any;
-  rowKey: any;
-  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
+  notesEditorOptions: any;
   constructor(service: DataService) {
     config({
       editorStylingMode: 'filled'
     });
     this.dataSource = service.getEmployees();
     this.states = service.getStates();
+    this.notesEditorOptions = { height: 100 };
   }
   customizeItem = (item) => {
-
-    if (item && item.itemType === "group" && item.caption === "Home Address") {
-      let index = this.dataGrid.instance.getRowIndexByKey(this.rowKey) || 0;
+    if (item && item.itemType === 'group' && item.caption === 'Home Address') {
+      const gridInstance = this.dataGrid.instance;
+      const editRowKey = gridInstance.option('editing.editRowKey');
+      let index = gridInstance.getRowIndexByKey(editRowKey);
       index = index === -1 ? 0 : index ;
-      let isVisible = this.dataGrid.instance.cellValue(index, "AddressRequired");
+      const isVisible = gridInstance.cellValue(index, 'AddressRequired');
       item.visible = isVisible;
     }
   }
   onEditorPreparing(e) {
-    if (e.dataField === "LastName" && e.parentType === "dataRow") {
-      e.editorOptions.disabled = e.row.data && e.row.data.FirstName === "";
+    if (e.dataField === 'LastName' && e.parentType === 'dataRow') {
+      e.editorOptions.disabled = e.row.data && e.row.data.FirstName === '';
     }
   }
-  onEditingStart(e) {
-    this.rowKey = e.key;
-  }
   onInitNewRow(e) {
-    this.rowKey = -1;
     e.data.AddressRequired = false;
-    e.data.FirstName = "";
+    e.data.FirstName = '';
   }
   setCellValue(newData, value) {
-    let column = (<any>this);
-    column.defaultSetCellValue(newData, value)
+    const column = (this as any);
+    column.defaultSetCellValue(newData, value);
   }
 }

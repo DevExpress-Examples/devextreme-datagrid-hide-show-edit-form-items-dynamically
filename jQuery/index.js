@@ -1,16 +1,11 @@
 $(function(){
-    let rowKey = -1;
     gridInstance = $("#gridContainer").dxDataGrid({
         onEditorPreparing: function(e){
           if (e.dataField === "LastName" && e.parentType === "dataRow") {
             e.editorOptions.disabled = e.row.data && e.row.data.FirstName === "";
           }
         },
-        onEditingStart: function(e){
-          rowKey = e.key;
-        },
         onInitNewRow: function(e){
-          rowKey = -1;
           e.data.AddressRequired = false;
           e.data.FirstName = "";
         },
@@ -25,18 +20,14 @@ $(function(){
             title: "Employee Info",
             showTitle: true,
             width: 700,
-            height: 725,
-            position: {
-              my: "top",
-              at: "top",
-              of: "window"
-            }
+            height: 725
           },
           form: {
             customizeItem: function(item){
-              if (item && item.itemType === "group" && item.caption === "Home Address") {
-                let index = gridInstance.getRowIndexByKey(rowKey) || 0;
-                index = index === -1 ? 0 : index ;
+              if(item && item.itemType === "group" && item.caption === "Home Address") {
+                let editRowKey = gridInstance.option('editing.editRowKey');
+                let index = gridInstance.getRowIndexByKey(editRowKey);
+                index = index === -1 ? 0 : index;
                 let isVisible = gridInstance.cellValue(index, "AddressRequired");
                 item.visible = isVisible;
               }
