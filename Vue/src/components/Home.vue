@@ -5,13 +5,11 @@
     :show-borders="true"
     @editor-preparing="onEditorPreparing"
     @init-new-row="onInitNewRow"
-    @editing-start="onEditingStart"
     key-expr="ID"
   >
     <dx-paging :enabled="false" />
     <dx-editing :allow-updating="true" :allow-adding="true" mode="popup">
       <dx-popup :show-title="true" :width="700" :height="725" title="Employee Info">
-        <dx-position my="top" at="top" of="window" />
       </dx-popup>
       <dx-form :customize-item="customizeItem">
         <dx-item :col-count="2" :col-span="2" item-type="group">
@@ -23,7 +21,7 @@
           <dx-item data-field="HireDate" />
           <dx-item
             :col-span="2"
-            :editor-options="editorOptions"
+            :editor-options="noteseditorOptions"
             data-field="Notes"
             editor-type="dxTextArea"
           />
@@ -58,7 +56,6 @@ import {
   DxEditing,
   DxPopup,
   DxLookup,
-  DxPosition,
   DxForm
 } from "devextreme-vue/data-grid";
 import { DxItem } from "devextreme-vue/form";
@@ -75,7 +72,6 @@ export default {
     DxEditing,
     DxPopup,
     DxLookup,
-    DxPosition,
     DxForm,
     DxItem
   },
@@ -83,9 +79,8 @@ export default {
     return {
       states: service.getStates(),
       dataSource: service.getEmployees(),
-      editorOptions: { height: 100 },
+      noteseditorOptions: { height: 100 },
       gridRefName: "grid",
-      rowKey: -1,
       setCellValue: function(newData, value) {
         let column = this;
         column.defaultSetCellValue(newData, value);
@@ -94,14 +89,12 @@ export default {
   },
   methods: {
     customizeItem(item) {
-      if (
-        item &&
-        item.itemType === "group" &&
-        item.caption === "Home Address"
-      ) {        
-        let index =  this.dataGrid.getRowIndexByKey(this.rowKey);
-        index = index === -1 ? 0 : index ;
-        let isVisible = this.dataGrid.cellValue(index, "AddressRequired");
+      if(item && item.itemType === "group" && item.caption === "Home Address") {
+        const gridInstance = this.dataGrid;
+        let editRowKey = gridInstance.option('editing.editRowKey');
+        let index = gridInstance.getRowIndexByKey(editRowKey);
+        index = index === -1 ? 0 : index;
+        let isVisible = gridInstance.cellValue(index, "AddressRequired");
         item.visible = isVisible;
       }
     },
@@ -110,11 +103,7 @@ export default {
         e.editorOptions.disabled = e.row.data && e.row.data.FirstName === "";
       }
     },
-    onEditingStart(e) {
-      this.rowKey = e.key;
-    },
     onInitNewRow(e) {
-      this.rowKey = -1;
       e.data.AddressRequired = false;
       e.data.FirstName = "";
     }
@@ -126,8 +115,3 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
