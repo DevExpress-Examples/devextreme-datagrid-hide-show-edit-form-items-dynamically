@@ -301,8 +301,5 @@ __pycache__/
 #ExampleRangeTester artifacts
 TesterMetadata.xml
 
-# License files
-*.licx
-
 # Backup files
-.bak
+*.bak
