@@ -58,8 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./data.service */ "./src/app/data.service.ts");
-/* harmony import */ var devextreme_core_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! devextreme/core/config */ "./node_modules/devextreme/core/config.js");
-/* harmony import */ var devextreme_core_config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(devextreme_core_config__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var devextreme_core_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! devextreme/core/config */ "./node_modules/devextreme/esm/core/config.js");
 /* harmony import */ var devextreme_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! devextreme-angular */ "./node_modules/devextreme-angular/fesm5/devextreme-angular.js");
 
 
@@ -79,7 +78,7 @@ var AppComponent = /** @class */ (function () {
                 item.visible = isVisible;
             }
         };
-        devextreme_core_config__WEBPACK_IMPORTED_MODULE_3___default()({
+        Object(devextreme_core_config__WEBPACK_IMPORTED_MODULE_3__["default"])({
             editorStylingMode: 'filled'
         });
         this.dataSource = service.getEmployees();
