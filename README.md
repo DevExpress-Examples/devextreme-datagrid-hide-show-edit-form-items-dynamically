@@ -34,7 +34,7 @@ This example demonstrates how to implement the following scenarios in DataGrid:
 - **React**
     - [App.js](React/src/App.js)
 - **ASP.NET Core**    
-    - [Index.cshtml](ASP.NET Core/Views/Home/Index.cshtml)
+    - [Index.cshtml](ASP.NET_Core/Views/Home/Index.cshtml)
 
 ## Documentation
 
