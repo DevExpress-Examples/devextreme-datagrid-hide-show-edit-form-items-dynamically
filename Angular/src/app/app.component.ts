@@ -24,11 +24,9 @@ export class AppComponent {
   customizeItem = (item) => {
     if (item && item.itemType === 'group' && item.caption === 'Home Address') {
       const gridInstance = this.dataGrid.instance;
-      const editRowKey = gridInstance.option('editing.editRowKey');
-      let index = gridInstance.getRowIndexByKey(editRowKey);
-      index = index === -1 ? 0 : index ;
-      const isVisible = gridInstance.cellValue(index, 'AddressRequired');
-      item.visible = isVisible;
+      const editRowKey = gridInstance.option("editing.editRowKey");
+      const rowData = gridInstance.getVisibleRows().find((r) => r.key === editRowKey).data;
+      item.visible = !!rowData.AddressRequired;
     }
   }
   onEditorPreparing(e) {
