@@ -21,7 +21,7 @@ This example demonstrates how to implement the following scenarios in DataGrid:
 
 - In the [onEditorPreparing](https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxDataGrid/Configuration/#onEditorPreparing) function, change the [disabled](https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxTextBox/Configuration/#disabled) option of the required form item editor.
 
-## Files to Look At
+## Files to Review
 
 - **jQuery**
     - [index.html](jQuery/index.html)
