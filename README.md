@@ -4,7 +4,7 @@
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
 
-# DevExtreme DataGrid - How to show/hide or enable/disable Edit Form items based on another item's value
+# DataGrid for DevExtreme - How to show/hide or enable/disable Edit Form items based on another item's value
 
 This example demonstrates how to implement the following scenarios in DataGrid: 
 
