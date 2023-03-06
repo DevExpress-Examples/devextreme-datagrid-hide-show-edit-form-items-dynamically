@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 
 export class Employee {
-  ID: number;
-  FirstName: string;
-  LastName: string;
-  Prefix: string;
-  Position: string;
-  BirthDate: string;
-  HireDate: string;
-  Notes: string;
-  Address: string;
-  AddressRequired: boolean;
-  StateID: number;
+  ID!: number;
+  FirstName?: string;
+  LastName?: string;
+  Prefix?: string;
+  Position?: string;
+  BirthDate?: string;
+  HireDate?: string;
+  Notes?: string;
+  Address?: string;
+  AddressRequired?: boolean;
+  StateID?: number;
 }
 
 export class State {
-  ID: number;
-  Name: string;
+  ID!: number;
+  Name?: string;
 }
 
 let employees: Employee[] = [{
