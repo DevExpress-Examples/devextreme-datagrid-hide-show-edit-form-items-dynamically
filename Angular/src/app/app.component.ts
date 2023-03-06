@@ -7,7 +7,7 @@ import config from 'devextreme/core/config';
 import dxDataGrid, {
   Column,
   EditorPreparingEvent,
-  InitNewRowEvent
+  InitNewRowEvent,
 } from 'devextreme/ui/data_grid';
 import { Item, GroupItem } from 'devextreme/ui/form';
 import { Properties as TextAreaProperties } from 'devextreme/ui/text_area';
@@ -34,13 +34,13 @@ export class AppComponent {
     this.notesEditorProperties = { height: 100 };
   }
   isHomeAddressGroup(item: GroupItem): boolean {
-    return item && item.itemType === "group" && item.caption === 'Home Address';
+    return item && item.itemType === 'group' && item.caption === 'Home Address';
   }
   customizeItem = (item: Item) => {
     if (this.isHomeAddressGroup(item)) {
       const gridInstance: dxDataGrid<Employee, number> = this.dataGrid.instance;
-      const editRowKey = gridInstance.option("editing")
-      const rowIndex = gridInstance.getRowIndexByKey(editRowKey?.editRowKey!);
+      const editing = gridInstance.option('editing');
+      const rowIndex = gridInstance.getRowIndexByKey(editing?.editRowKey!);
       item.visible = gridInstance.cellValue(rowIndex, 'AddressRequired');
     }
   };
