@@ -1,45 +1,64 @@
 import { Component, ViewChild } from '@angular/core';
-import { DataService } from './data.service';
-import config from 'devextreme/core/config';
 import { DxDataGridComponent } from 'devextreme-angular';
+import { DataService, Employee, State } from './data.service';
+
+import config from 'devextreme/core/config';
+
+import dxDataGrid, {
+  Column,
+  EditorPreparingEvent,
+  InitNewRowEvent,
+} from 'devextreme/ui/data_grid';
+import { Item, GroupItem } from 'devextreme/ui/form';
+import { Properties as TextAreaProperties } from 'devextreme/ui/text_area';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   providers: [DataService],
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent;
-  dataSource: any;
-  states: any;
-  notesEditorOptions: any;
+  @ViewChild(DxDataGridComponent) dataGrid!: DxDataGridComponent;
+
+  dataSource: Employee[];
+  states: State[];
+  notesEditorProperties: TextAreaProperties;
+
   constructor(service: DataService) {
     config({
-      editorStylingMode: 'filled'
+      editorStylingMode: 'filled',
     });
     this.dataSource = service.getEmployees();
     this.states = service.getStates();
-    this.notesEditorOptions = { height: 100 };
+    this.notesEditorProperties = { height: 100 };
   }
-  customizeItem = (item) => {
-    if (item && item.itemType === 'group' && item.caption === 'Home Address') {
-      const gridInstance = this.dataGrid.instance;
-      const editRowKey = gridInstance.option('editing.editRowKey');
-      const rowIndex = gridInstance.getRowIndexByKey(editRowKey);
-      item.visible = gridInstance.cellValue(rowIndex, "AddressRequired");
+  isHomeAddressGroup(item: GroupItem): boolean {
+    return item && item.itemType === 'group' && item.caption === 'Home Address';
+  }
+  customizeItem = (item: Item) => {
+    if (this.isHomeAddressGroup(item)) {
+      const gridInstance: dxDataGrid<Employee, number> = this.dataGrid.instance;
+      const editing = gridInstance.option('editing');
+      const rowIndex = gridInstance.getRowIndexByKey(editing?.editRowKey!);
+      item.visible = gridInstance.cellValue(rowIndex, 'AddressRequired');
     }
-  }
-  onEditorPreparing(e) {
+  };
+  onEditorPreparing(e: EditorPreparingEvent<Employee, number>) {
     if (e.dataField === 'LastName' && e.parentType === 'dataRow') {
-      e.editorOptions.disabled = e.row.data && e.row.data.FirstName === '';
+      e.editorOptions.disabled = e.row?.data?.FirstName === '';
     }
   }
-  onInitNewRow(e) {
+  onInitNewRow(e: InitNewRowEvent<Employee, number>) {
     e.data.AddressRequired = false;
     e.data.FirstName = '';
   }
-  setCellValue(newData, value) {
-    const column = (this as any);
-    column.defaultSetCellValue(newData, value);
+  setCellValue(
+    this: Column,
+    newData: Employee,
+    value: number,
+    currentRowData: Employee
+  ) {
+    this.defaultSetCellValue!(newData, value, currentRowData);
   }
 }
