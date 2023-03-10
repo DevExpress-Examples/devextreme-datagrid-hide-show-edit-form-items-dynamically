@@ -46,7 +46,7 @@ export class AppComponent {
   };
   onEditorPreparing(e: EditorPreparingEvent<Employee, number>) {
     if (e.dataField === 'LastName' && e.parentType === 'dataRow') {
-      e.editorOptions.disabled = e.row?.data && e.row?.data.FirstName === '';
+      e.editorOptions.disabled = e.row?.data?.FirstName === '';
     }
   }
   onInitNewRow(e: InitNewRowEvent<Employee, number>) {
