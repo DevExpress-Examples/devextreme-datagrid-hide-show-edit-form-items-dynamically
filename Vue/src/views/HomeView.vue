@@ -3,6 +3,5 @@ import HomeContent from "../components/HomeContent.vue";
 </script>
 
 <template>
-  <HomeContent text="Count" />
+  <HomeContent />
 </template>
-

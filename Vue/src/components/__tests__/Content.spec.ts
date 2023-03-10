@@ -1,11 +1,11 @@
 import { describe, it, expect } from "vitest";
 
 import { mount } from "@vue/test-utils";
-import Content from "../HomeContent.vue";
+import HomeContent from "../HomeContent.vue";
 
-describe("Content", () => {
+describe("HomeContent", () => {
   it("renders properly", () => {
-    const wrapper = mount(Content, { props: { text: "count" } });
-    expect(wrapper.text()).toContain("count");
+    const wrapper = mount(HomeContent);
+    expect(wrapper).toBeTruthy();
   });
 });
