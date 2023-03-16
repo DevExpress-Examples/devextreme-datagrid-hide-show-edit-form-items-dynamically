@@ -2,8 +2,10 @@ using ASP_NET_Core.Models;
 using System;
 using System.Collections.Generic;
 
-namespace ASP_NET_Core.Models {
-    static class SampleData {
+namespace ASP_NET_Core.Models
+{
+    static class SampleData
+    {
         public static List<State> GetStates()
         {
             List<State> States = new List<State> {

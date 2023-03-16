@@ -19,27 +19,10 @@
     <script src="~/js/vendor.js" asp-append-version="true"></script>
 </head>
 
-<body style="padding-top: 5rem;">
-
-    <nav class="navbar navbar-dark bg-dark fixed-top navbar-expand-md">
-        <a class="navbar-brand" href="/">ASP_NET_Core</a>
-
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="active nav-item"><a href="#" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <main role="main" class="container">
+<body class="dx-viewport">
+    <div class="demo-container">
         @RenderBody()
-    </main>
+    </div>
 </body>
 
 </html>

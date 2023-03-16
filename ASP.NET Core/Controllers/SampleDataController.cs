@@ -14,7 +14,8 @@ namespace ASP_NET_Core.Controllers {
     public class SampleDataController : Controller {
 
         [HttpGet]
-        public object Get(DataSourceLoadOptions loadOptions) {
+        public object Get(DataSourceLoadOptions loadOptions)
+        {
             return DataSourceLoader.Load(SampleData.GetEmployees(), loadOptions);
         }
 

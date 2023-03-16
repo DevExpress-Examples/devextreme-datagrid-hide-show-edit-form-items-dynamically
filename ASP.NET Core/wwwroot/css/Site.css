@@ -1,2 +1,7 @@
+.demo-container {
+    margin: 50px 50px;
+    width: 90vh;
+}
 body {
+    margin: 8px;
 }
