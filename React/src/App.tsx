@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import './App.css';
 import 'devextreme/dist/css/dx.material.blue.light.compact.css';
 import config from 'devextreme/core/config';
@@ -67,7 +67,7 @@ function App() {
 
   return (
     <div className="main">
-      <DataGrid
+      <DataGrid<Employee, number>
         ref={dataGrid}
         onEditorPreparing={onEditorPreparing}
         onInitNewRow={onInitNewRow}

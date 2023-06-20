@@ -28,15 +28,14 @@ let defaultScripts = [
     diagramScript = ["node_modules/devexpress-diagram/dist/dx-diagram.min.js"],
     ganttScript = ["node_modules/devexpress-gantt/dist/dx-gantt.min.js"],
     dxtScripts = [
-        "node_modules/devextreme/dist/js/dx.all.js",
-        "node_modules/devextreme/dist/js/dx.aspnet.mvc.js",
+        "node_modules/devextreme-dist/js/dx.all.js",
+        "node_modules/devextreme-dist/js/dx.aspnet.mvc.js",
         "node_modules/devextreme-aspnet-data/js/dx.aspnet.data.js"];
 
 
 let dxtStyles = [
     "node_modules/bootstrap/dist/css/bootstrap.css",
-    "node_modules/devextreme/dist/css/dx.common.css",
-    "node_modules/devextreme/dist/css/dx.material.blue.light.compact.css"],
+    "node_modules/devextreme-dist/css/dx.material.blue.light.compact.css"],
     ganttStyles = ["node_modules/devexpress-gantt/dist/dx-gantt.min.css"],
     diagramStyles = ["node_modules/devexpress-diagram/dist/dx-diagram.min.css"];
 
