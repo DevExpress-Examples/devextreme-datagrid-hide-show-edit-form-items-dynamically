@@ -53,6 +53,7 @@ export class AppComponent {
     e.data.AddressRequired = false;
     e.data.FirstName = '';
   }
+
   setCellValue(
     this: Column,
     newData: Employee,
