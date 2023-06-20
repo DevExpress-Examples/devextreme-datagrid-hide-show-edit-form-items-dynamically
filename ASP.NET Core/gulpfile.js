@@ -102,10 +102,10 @@ gulp.task("add:css", function () {
 });
 
 gulp.task("add:icons", function () {
-    return gulp.src(["node_modules/devextreme/dist/css/icons/*"]).pipe(gulp.dest(paths.icons));
+    return gulp.src(["node_modules/devextreme-dist/css/icons/*"]).pipe(gulp.dest(paths.icons));
 })
 gulp.task("add:fonts", function () {
-    return gulp.src(["node_modules/devextreme/dist/css/fonts/*"]).pipe(gulp.dest(paths.fonts));
+    return gulp.src(["node_modules/devextreme-dist/css/fonts/*"]).pipe(gulp.dest(paths.fonts));
 })
 
 gulp.task("add-resources", gulp.series(["add:js", "add:css", "add:icons", "add:fonts"]));
