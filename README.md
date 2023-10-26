@@ -30,7 +30,7 @@ This example demonstrates how to implement the following scenarios in DataGrid:
     - [app.component.html](Angular/src/app/app.component.html)
     - [app.component.ts](Angular/src/app/app.component.ts)
 - **Vue**
-    - [Home.vue](Vue/src/components/Home.vue)
+    - [Home.vue](Vue/src/components/HomeContent.vue)
 - **React**
     - [App.js](React/src/App.js)
 - **ASP.NET Core**    
