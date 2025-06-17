@@ -1,15 +1,22 @@
-/* eslint-env node */
-require("@rushstack/eslint-patch/modern-module-resolution");
-
 module.exports = {
   root: true,
-  extends: [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/eslint-config-typescript",
-    "@vue/eslint-config-prettier",
-  ],
-  parserOptions: {
-    ecmaVersion: "latest",
-  },
+  extends: ['devextreme/spell-check'],
+  overrides: [{
+    files: ['*.ts', '*.vue'],
+    extends: [
+      '@vue/eslint-config-typescript',
+      'devextreme/vue'
+    ],
+    env: { es6: true },
+    parserOptions: {
+      project: './tsconfig.json',
+      'createDefaultProgram': true,
+      'ecmaVersion': 2020,
+    },
+    globals: {
+      System: false,
+      AzureGateway: false,
+      AzureFileSystem: false,
+    },
+  }]
 };
