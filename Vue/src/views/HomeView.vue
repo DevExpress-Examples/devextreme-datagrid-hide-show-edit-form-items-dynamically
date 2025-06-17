@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HomeContent from "../components/HomeContent.vue";
+import HomeContent from '../components/HomeContent.vue';
 </script>
 
 <template>
-  <HomeContent />
+  <HomeContent/>
 </template>

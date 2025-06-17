@@ -20,6 +20,7 @@
   <ItemGroup>
     <PackageReference Include="DevExtreme.AspNet.Data" Version="5.*" />
     <PackageReference Include="DevExtreme.AspNet.Core" Version="24.2.*" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ProjectExtensions>

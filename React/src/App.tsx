@@ -3,28 +3,29 @@ import './App.css';
 import 'devextreme/dist/css/dx.material.blue.light.compact.css';
 import config from 'devextreme/core/config';
 import 'devextreme-react/text-area';
-import service, { Employee, State } from './data';
 import DataGrid, {
   Column,
   Lookup,
   Form,
   Popup,
   Paging,
-  Editing
+  Editing,
+  type DataGridRef,
 } from 'devextreme-react/data-grid';
 import { SimpleItem, GroupItem } from 'devextreme-react/form';
 
-import {
+import type {
   Column as EditingColumn,
   EditorPreparingEvent,
   InitNewRowEvent,
 } from 'devextreme/ui/data_grid';
 
-import { Item as FormItem, GroupItem as FormGroupItem } from 'devextreme/ui/form';
-import { Properties as TextAreaProperties } from 'devextreme/ui/text_area';
+import type { Item as FormItem, GroupItem as FormGroupItem } from 'devextreme/ui/form';
+import type { Properties as TextAreaProperties } from 'devextreme/ui/text_area';
+import service, { type Employee, type State } from './data';
 
 config({
-  editorStylingMode: 'filled'
+  editorStylingMode: 'filled',
 });
 
 const notesEditorOptions: TextAreaProperties = { height: 100 };
@@ -34,34 +35,42 @@ const states: State[] = service.getStates();
 function isHomeAddressGroup(item: FormGroupItem): boolean {
   return item && item.itemType === 'group' && item.caption === 'Home Address';
 }
+
 function setCellValue(
   this: EditingColumn,
   newData: Employee,
   value: number,
-  currentRowData: Employee
-) {
-  this.defaultSetCellValue!(newData, value, currentRowData);
+  currentRowData: Employee,
+): void {
+  // @ts-expect-error // defaultSetCellValue is null only for service columns
+  this.defaultSetCellValue(newData, value, currentRowData).then(() => {}, () => {});
 }
-function onEditorPreparing(e: EditorPreparingEvent<Employee, number>) {
+
+function onEditorPreparing(e: EditorPreparingEvent<Employee, number>): void {
   if (e.dataField === 'LastName' && e.parentType === 'dataRow') {
     e.editorOptions.disabled = e.row?.data && e.row?.data.FirstName === '';
   }
 }
-function onInitNewRow(e: InitNewRowEvent<Employee, number>) {
+
+function onInitNewRow(e: InitNewRowEvent<Employee, number>): void {
   e.data.AddressRequired = false;
   e.data.FirstName = '';
 }
 
-function App() {
-
-  const dataGrid = useRef<DataGrid<Employee, number>>(null);
+function App(): JSX.Element {
+  const dataGrid = useRef<DataGridRef<Employee, number>>(null);
 
   const customizeItem = useCallback((item: FormItem) => {
     if (isHomeAddressGroup(item)) {
-      const dataGridInstance = dataGrid.current!.instance
-      const editing = dataGridInstance.option('editing');
-      const rowIndex = dataGridInstance.getRowIndexByKey(editing?.editRowKey!);
-      item.visible = dataGridInstance.cellValue(rowIndex, 'AddressRequired');
+      const dataGridInstance = dataGrid?.current?.instance();
+      const editing = dataGridInstance?.option('editing');
+      const editRowKey = editing?.editRowKey;
+      if (typeof editRowKey === 'number') {
+        const rowIndex = dataGridInstance?.getRowIndexByKey(editRowKey);
+        if (typeof rowIndex === 'number' && rowIndex >= 0) {
+          item.visible = dataGridInstance?.cellValue(rowIndex, 'AddressRequired');
+        }
+      }
     }
   }, []);
 
@@ -72,15 +81,15 @@ function App() {
         onEditorPreparing={onEditorPreparing}
         onInitNewRow={onInitNewRow}
         dataSource={dataSource}
-        keyExpr={"ID"}
+        keyExpr="ID"
         showBorders={true}>
         <Paging enabled={false} />
         <Editing
-          mode={"popup"}
+          mode="popup"
           allowAdding={true}
           allowUpdating={true}>
           <Popup
-            title={"Employee Info"}
+            title="Employee Info"
             showTitle={true}
             width={700}
             height={725}>
@@ -89,65 +98,65 @@ function App() {
             <GroupItem
               colCount={2}
               colSpan={2}>
-              <SimpleItem dataField={"FirstName"} />
-              <SimpleItem dataField={"LastName"} />
-              <SimpleItem dataField={"Prefix"} />
-              <SimpleItem dataField={"BirthDate"} />
-              <SimpleItem dataField={"Position"} />
-              <SimpleItem dataField={"HireDate"} />
+              <SimpleItem dataField="FirstName" />
+              <SimpleItem dataField="LastName" />
+              <SimpleItem dataField="Prefix" />
+              <SimpleItem dataField="BirthDate" />
+              <SimpleItem dataField="Position" />
+              <SimpleItem dataField="HireDate" />
               <SimpleItem
                 dataField="Notes"
-                editorType={"dxTextArea"}
+                editorType="dxTextArea"
                 colSpan={2}
                 editorOptions={notesEditorOptions} />
             </GroupItem>
             <SimpleItem
-              dataField={"AddressRequired"}
+              dataField="AddressRequired"
               colSpan={2} />
             <GroupItem
-              caption={"Home Address"}
+              caption="Home Address"
               colCount={2}
               colSpan={2}>
-              <SimpleItem dataField={"StateID"} />
-              <SimpleItem dataField={"Address"} />
+              <SimpleItem dataField="StateID" />
+              <SimpleItem dataField="Address" />
             </GroupItem>
           </Form>
         </Editing>
         <Column
-          dataField={"Prefix"}
-          caption={"Title"}
+          dataField="Prefix"
+          caption="Title"
           width={70} />
         <Column
-          dataField={"FirstName"}
+          dataField="FirstName"
           setCellValue={setCellValue} />
-        <Column dataField={"LastName"} />
+        <Column dataField="LastName" />
         <Column
-          dataField={"BirthDate"}
-          dataType={"date"} />
+          dataField="BirthDate"
+          dataType="date" />
         <Column
-          dataField={"Position"}
+          dataField="Position"
           width={170} />
         <Column
-          dataField={"HireDate"}
-          dataType={"date"} />
+          dataField="HireDate"
+          dataType="date" />
         <Column
-          dataField={"StateID"}
-          caption={"State"}
+          dataField="StateID"
+          caption="State"
           width={125}>
           <Lookup
             dataSource={states}
-            displayExpr={"Name"}
-            valueExpr={"ID"}>
+            displayExpr="Name"
+            valueExpr="ID">
           </Lookup>
         </Column>
         <Column
-          dataField={"Address"}
+          dataField="Address"
           visible={false} />
         <Column
-          dataField={"Notes"}
+          dataField="Notes"
           visible={false} />
         <Column
-          dataField={"AddressRequired"}
+          dataField="AddressRequired"
           setCellValue={setCellValue}
           visible={false} />
       </DataGrid>

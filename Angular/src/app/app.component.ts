@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
-import { DataService, Employee, State } from './data.service';
 
 import config from 'devextreme/core/config';
 
@@ -11,6 +10,7 @@ import dxDataGrid, {
 } from 'devextreme/ui/data_grid';
 import { Item, GroupItem } from 'devextreme/ui/form';
 import { Properties as TextAreaProperties } from 'devextreme/ui/text_area';
+import { DataService, Employee, State } from './data.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,9 @@ export class AppComponent {
   @ViewChild(DxDataGridComponent) dataGrid!: DxDataGridComponent;
 
   dataSource: Employee[];
+
   states: State[];
+
   notesEditorProperties: TextAreaProperties;
 
   constructor(service: DataService) {
@@ -33,23 +35,29 @@ export class AppComponent {
     this.states = service.getStates();
     this.notesEditorProperties = { height: 100 };
   }
+
   isHomeAddressGroup(item: GroupItem): boolean {
     return item && item.itemType === 'group' && item.caption === 'Home Address';
   }
-  customizeItem = (item: Item) => {
+
+  customizeItem = (item: Item): void => {
     if (this.isHomeAddressGroup(item)) {
       const gridInstance: dxDataGrid<Employee, number> = this.dataGrid.instance;
       const editing = gridInstance.option('editing');
-      const rowIndex = gridInstance.getRowIndexByKey(editing?.editRowKey!);
-      item.visible = gridInstance.cellValue(rowIndex, 'AddressRequired');
+      if (editing && typeof editing.editRowKey === 'number') {
+        const rowIndex = gridInstance.getRowIndexByKey(editing.editRowKey);
+        item.visible = gridInstance.cellValue(rowIndex, 'AddressRequired');
+      }
     }
   };
-  onEditorPreparing(e: EditorPreparingEvent<Employee, number>) {
+
+  onEditorPreparing(e: EditorPreparingEvent<Employee, number>): void {
     if (e.dataField === 'LastName' && e.parentType === 'dataRow') {
       e.editorOptions.disabled = e.row?.data?.FirstName === '';
     }
   }
-  onInitNewRow(e: InitNewRowEvent<Employee, number>) {
+
+  onInitNewRow(e: InitNewRowEvent<Employee, number>): void {
     e.data.AddressRequired = false;
     e.data.FirstName = '';
   }
@@ -58,8 +66,9 @@ export class AppComponent {
     this: Column,
     newData: Employee,
     value: number,
-    currentRowData: Employee
-  ) {
-    this.defaultSetCellValue!(newData, value, currentRowData);
+    currentRowData: Employee,
+  ): void {
+    // @ts-expect-error // defaultSetCellValue is null only for service columns
+    await this.defaultSetCellValue(newData, value, currentRowData);
   }
 }
