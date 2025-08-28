@@ -1,54 +1,55 @@
 <!-- default badges list -->
-![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/340354634/25.1.2%2B)
-[![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/T1129779)
+![](https://img.shields.io/endpoint?url=https://codecentral.devexpress.com/api/v1/VersionRange/190147423/24.1.3%2B)
+[![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/T828685)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 [![](https://img.shields.io/badge/💬_Leave_Feedback-feecdd?style=flat-square)](#does-this-example-address-your-development-requirementsobjectives)
 <!-- default badges end -->
-# DevExtreme Examples Template
 
-This is the repository template for creating new examples. 
+# DataGrid for DevExtreme - How to show/hide or enable/disable Edit Form items based on another item's value
 
-![Example image](images/image-template.png)
+This example demonstrates how to implement the following scenarios in DataGrid: 
 
-Use **DevExtreme _Product_ - _Task_** template for a title. 
+- Hide the **Home Address** form item if the **AddressRequired** value is false.
+- Disable the **LastName** item editor if the **FirstName** form item value is empty. 
 
-Describe the solved task in this section.
+![form-items](datagrid-hide-disable-form-items.png)
 
-Put a screenshot/gif that illustrates the result here.
+## Implementation Details
 
-Then, add implementation details (steps, code snippets, and other technical information in a free form), or add a link to an existing document with implementation details. 
+- Define the [setCellValue](https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxDataGrid/Configuration/columns/#setCellValue) callback function for the "AddressRequired" and "FirstName" columns to re-render items after an editor value is changed.
+- Handle the [customizeItem](https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxForm/Configuration/#customizeItem) form event.
+-  In the event handler, call the [getRowIndexByKey](https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxDataGrid/Methods/#getRowIndexByKeykey) and [cellValue](https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxDataGrid/Methods/#cellValuerowIndex_dataField) methods to obtain current editor values. Assign the value obtained from the **cellValue** method to the item's [visible](https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxForm/Item_Types/SimpleItem/#visible) property.
+
+- In the [onEditorPreparing](https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxDataGrid/Configuration/#onEditorPreparing) function, change the [disabled](https://js.devexpress.com/Documentation/ApiReference/UI_Widgets/dxTextBox/Configuration/#disabled) option of the required form item editor.
 
 ## Files to Review
 
+- **jQuery**
+    - [index.html](jQuery/index.html)
+    - [index.js](jQuery/index.js)
 - **Angular**
     - [app.component.html](Angular/src/app/app.component.html)
     - [app.component.ts](Angular/src/app/app.component.ts)
-- **React**
-    - [App.tsx](React/src/App.tsx)
 - **Vue**
-    - [App.vue](Vue/src/App.vue)
     - [Home.vue](Vue/src/components/HomeContent.vue)
-- **jQuery**
-    - [index.html](jQuery/src/index.html)
-    - [index.js](jQuery/src/index.js)
+- **React**
+    - [App.js](React/src/App.js)
 - **ASP.NET Core**    
     - [Index.cshtml](ASP.NET%20Core/Views/Home/Index.cshtml)
 
 ## Documentation
 
-- link
-- link
-- ...
+- [Getting Started with DataGrid](https://js.devexpress.com/Documentation/Guide/UI_Components/DataGrid/Getting_Started_with_DataGrid/)
+- [DataGrid - API Reference](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxDataGrid/)
+- [Form - API Reference](https://js.devexpress.com/Documentation/ApiReference/UI_Components/dxForm/)
 
 ## More Examples
 
-- link
-- link
-- ...
+- [DataGrid - How to implement a custom editing form using dxForm and dxPopup](https://github.com/DevExpress-Examples/devextreme-datagrid-custom-editing-form)
 <!-- feedback -->
 ## Does this example address your development requirements/objectives?
 
-[<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=devextreme-examples-template&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=devextreme-examples-template&~~~was_helpful=no)
+[<img src="https://www.devexpress.com/support/examples/i/yes-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=devextreme-datagrid-hide-show-edit-form-items-dynamically&~~~was_helpful=yes) [<img src="https://www.devexpress.com/support/examples/i/no-button.svg"/>](https://www.devexpress.com/support/examples/survey.xml?utm_source=github&utm_campaign=devextreme-datagrid-hide-show-edit-form-items-dynamically&~~~was_helpful=no)
 
 (you will be redirected to DevExpress.com to submit your response)
 <!-- feedback end -->
