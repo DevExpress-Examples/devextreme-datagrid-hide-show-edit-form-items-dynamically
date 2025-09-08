@@ -15,7 +15,19 @@ public class SampleDataController: Controller {
 
     [HttpGet]
     public object Get(DataSourceLoadOptions loadOptions) {
-        return DataSourceLoader.Load(SampleData.Orders, loadOptions);
+        return DataSourceLoader.Load(SampleData.GetEmployees(), loadOptions);
+    }
+
+    [HttpPost]
+    public object Post(string values)
+    {
+        return Ok();
+    }
+    
+    [HttpPut]
+    public object Put(int key, string values)
+    {
+        return Ok();
     }
 
 }
