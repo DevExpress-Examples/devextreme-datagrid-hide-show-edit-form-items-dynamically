@@ -7,7 +7,7 @@ import DataGrid, {
   Paging,
   Editing,
 } from 'devextreme-react/data-grid';
-import { SimpleItem, GroupItem, Label } from 'devextreme-react/data-grid';
+import { SimpleItem, GroupItem, Label } from 'devextreme-react/form';
 import config from 'devextreme/core/config';
 
 import type { DataGridRef, DataGridTypes } from 'devextreme-react/data-grid';
