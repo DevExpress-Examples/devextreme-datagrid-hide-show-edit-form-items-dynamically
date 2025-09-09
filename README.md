@@ -24,15 +24,15 @@ This example demonstrates how to implement the following scenarios in DataGrid:
 ## Files to Review
 
 - **jQuery**
-    - [index.html](jQuery/index.html)
-    - [index.js](jQuery/index.js)
+    - [index.html](jQuery/src/index.html)
+    - [index.js](jQuery/src/index.js)
 - **Angular**
     - [app.component.html](Angular/src/app/app.component.html)
     - [app.component.ts](Angular/src/app/app.component.ts)
 - **Vue**
     - [Home.vue](Vue/src/components/HomeContent.vue)
 - **React**
-    - [App.js](React/src/App.js)
+    - [App.js](React/src/App.tsx)
 - **ASP.NET Core**    
     - [Index.cshtml](ASP.NET%20Core/Views/Home/Index.cshtml)
 
