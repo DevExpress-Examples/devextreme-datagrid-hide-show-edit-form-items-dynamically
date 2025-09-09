@@ -1,43 +1,43 @@
-using Newtonsoft.Json;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ASP_NET_Core.Models {
     public class Employee {
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "ID")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("ID")]
         public int ID { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "FirstName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("FirstName")]
         public string FirstName { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "LastName")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("LastName")]
         public string LastName { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "Phone")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("Phone")]
         public string Phone { get; set; }
 
         [Display(Name = "Title")]
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "Prefix")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("Prefix")]
         public string Prefix { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "Position")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("Position")]
         public string Position { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "BirthDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("BirthDate")]
         public DateTime? BirthDate { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "HireDate")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("HireDate")]
         public DateTime? HireDate { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "Notes")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("Notes")]
         public string Notes { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "Email")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("Email")]
         public string Email { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "Address")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("Address")]
         public string Address { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "City")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("City")]
         public string City { get; set; }
 
         [Display(Name = "State")]
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "StateID")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("StateID")]
         public int? StateID { get; set; }
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "State")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("State")]
         public string State { get; set; }
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore, PropertyName = "AddressRequired")]
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault), JsonPropertyName("AddressRequired")]
         public bool AddressRequired { get; set; }
     }
 }

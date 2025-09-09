@@ -61,6 +61,7 @@
                                    .Editor(editor => editor.TextArea().Height(100));
                            });
                        items.AddSimpleFor(m => m.AddressRequired)
+                            .Label(label => label.Location(FormLabelLocation.Left))
                             .ColSpan(2);
                        items.AddGroup()
                            .Caption("Home Address")
