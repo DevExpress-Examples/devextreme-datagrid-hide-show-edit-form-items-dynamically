@@ -7,6 +7,7 @@ import {
   DxEditing,
   DxPopup,
   DxLookup,
+  DxLabel,
   DxForm,
   type DxDataGridTypes
 } from 'devextreme-vue/data-grid';
@@ -14,7 +15,7 @@ import { DxItem, type DxFormTypes } from 'devextreme-vue/form';
 import { type DxTextAreaTypes } from 'devextreme-vue/text-area';
 import config from 'devextreme/core/config';
 import service, { type Employee } from '../data';
-
+import 'devextreme-vue/text-area';
 import 'devextreme/dist/css/dx.material.blue.light.compact.css';
 
 config({
@@ -109,7 +110,9 @@ function setCellValue(
           <DxItem
             data-field="AddressRequired"
             :col-span="2"
-          />
+          >
+            <DxLabel location="left"/>
+          </DxItem>
           <DxItem
             :col-count="2"
             :col-span="2"
