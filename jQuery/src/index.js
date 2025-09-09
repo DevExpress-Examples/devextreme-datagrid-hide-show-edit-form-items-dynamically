@@ -54,6 +54,7 @@ $(() => {
           },
           {
             dataField: 'AddressRequired',
+            label: { location: 'left' },
             colSpan: 2,
           },
           {
