@@ -7,7 +7,7 @@ import DataGrid, {
   Paging,
   Editing,
 } from 'devextreme-react/data-grid';
-import { SimpleItem, GroupItem } from 'devextreme-react/form';
+import { SimpleItem, GroupItem, Label } from 'devextreme-react/data-grid';
 import config from 'devextreme/core/config';
 
 import type { DataGridRef, DataGridTypes } from 'devextreme-react/data-grid';
@@ -106,7 +106,10 @@ function App(): JSX.Element {
             </GroupItem>
             <SimpleItem
               dataField="AddressRequired"
-              colSpan={2} />
+              colSpan={2}
+            >
+              <Label location="left" />
+            </SimpleItem>
             <GroupItem
               caption="Home Address"
               colCount={2}
