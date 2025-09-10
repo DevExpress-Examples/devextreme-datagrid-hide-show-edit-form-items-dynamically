@@ -12,7 +12,8 @@ This example demonstrates how to implement the following scenarios in DataGrid:
 - Hide the **Home Address** form item if the **AddressRequired** value is false.
 - Disable the **LastName** item editor if the **FirstName** form item value is empty. 
 
-![form-items](datagrid-hide-disable-form-items.png)
+<img width="575" height="523" alt="chrome_wB28yg9ush" src="https://github.com/user-attachments/assets/93f19854-0cd4-4c72-8275-2c803faab171" />
+
 
 ## Implementation Details
 
