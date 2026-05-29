@@ -120,12 +120,11 @@ function Process-JavaScriptProjects {
         Push-Location $folderName
 
         try {
-            Write-Output "`nRemoving node_modules & package-lock.json: $pwd"
+            Write-Output "`nRemoving node_modules: $pwd"
             Remove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue
-            Remove-Item -Force package-lock.json -ErrorAction SilentlyContinue
             Install-Packages -folderName $folderName -packages $packages -buildVersion $buildVersion
             Write-Output "`nInstalling remaining packages in $folderName"
-            npm install --save --save-exact --no-fund --loglevel=error
+            npm install --no-fund --loglevel=error
             if (-not $?) {
                 throw "ERROR: Failed to install remaining packages in $folderName"
             }
