@@ -1,13 +1,9 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.node.json",
+  "extends": "@vue/tsconfig/tsconfig.json",
   "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*"],
   "compilerOptions": {
     "composite": true,
   "types": ["node"],
-  // Workaround for https://github.com/vuejs/tsconfig/issues/6
-  "preserveValueImports": false,
-  "importsNotUsedAsValues": "remove",
   "verbatimModuleSyntax": true,
-  "ignoreDeprecations": "5.0"
   }
 }

@@ -1,13 +1,10 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.web.json",
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "include": ["env.d.ts", "src/**/*", "src/**/*.vue"],
   "exclude": ["src/**/__tests__/*"],
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
-    // Workaround for https://github.com/vuejs/tsconfig/issues/6
-    "preserveValueImports": false,
-    "importsNotUsedAsValues": "remove",
     "verbatimModuleSyntax": true,
     "paths": {
       "@/*": ["./src/*"]
