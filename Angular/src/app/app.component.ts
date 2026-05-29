@@ -1,12 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { DxDataGridComponent, type DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
+import { DxDataGridModule, DxDataGridComponent, type DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import config from 'devextreme/core/config';
 
 import type { DxFormTypes } from 'devextreme-angular/ui/form';
 import type { DxTextAreaTypes } from 'devextreme-angular/ui/text-area';
 import { DataService, type Employee, type State } from './data.service';
+import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
 
 @Component({
+  imports: [DxDataGridModule, DxTextAreaModule],
   selector: 'app-root',
   templateUrl: './app.component.html',
   providers: [DataService],
