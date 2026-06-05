@@ -16,15 +16,15 @@ jobs:
     timeout-minutes: 60
     steps:
     - name: Get sources
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Use Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: '22'
 
     - name: Restore npm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ./Angular/node_modules
         key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
@@ -45,15 +45,15 @@ jobs:
     timeout-minutes: 60
     steps:
     - name: Get sources
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Use Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: '22'
 
     - name: Restore npm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ./jQuery/node_modules
         key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
@@ -74,15 +74,15 @@ jobs:
     timeout-minutes: 60
     steps:
     - name: Get sources
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Use Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: '22'
 
     - name: Restore npm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ./React/node_modules
         key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
@@ -103,15 +103,15 @@ jobs:
     timeout-minutes: 60
     steps:
     - name: Get sources
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
 
     - name: Use Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: '22'
 
     - name: Restore npm cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ./Vue/node_modules
         key: ${{ runner.os }}-node-modules-${{ hashFiles('**/package-lock.json') }}
