@@ -66,7 +66,6 @@ export class AppComponent {
     value: number,
     currentRowData: Employee,
   ): void {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.defaultSetCellValue?.(newData, value, currentRowData);
   }
 }
