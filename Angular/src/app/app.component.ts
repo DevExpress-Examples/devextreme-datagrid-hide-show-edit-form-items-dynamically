@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { DxDataGridModule, DxDataGridComponent, type DxDataGridTypes } from 'devextreme-angular/ui/data-grid';
 import config from 'devextreme/core/config';
 
@@ -12,6 +12,7 @@ import { DxTextAreaModule } from 'devextreme-angular/ui/text-area';
   selector: 'app-root',
   templateUrl: './app.component.html',
   providers: [DataService],
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
